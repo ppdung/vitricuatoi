@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Location</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f8f9fa;
+    text-align: center;
+  }
+  #locationInfo {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  #map {
+    width: 100%;
+    height: 400px;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+<div id="locationInfo">
+  <h1>Vị trí của tôi</h1>
+  <p id="latitude">Vĩ độ: Đang tải...</p>
+  <p id="longitude">Kinh độ: Đang tải...</p>
+  <div id="map"></div>
+</div>
+
+<script>
+function initMap(latitude, longitude) {
+  const mapDiv = document.getElementById('map');
+  const map = new google.maps.Map(mapDiv, {
+    center: { lat: latitude, lng: longitude },
+    zoom: 12
+  });
+  const marker = new google.maps.Marker({
+    position: { lat: latitude, lng: longitude },
+    map: map
+  });
+}
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      document.getElementById('latitude').textContent = 'Vĩ độ: ' + latitude;
+      document.getElementById('longitude').textContent = 'Kinh độ: ' + longitude;
+      initMap(latitude, longitude);
+    }, function(error) {
+      alert('Error getting location: ' + error.message);
+    });
+  } else {
+    alert('Geolocation is not supported by your browser.');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  getLocation();
+});
+</script>
+
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCT10g_78FHCrZ1i8Nu4a_0sVruR9qTc-k&callback=initMap">
+</script>
+</body>
+</html>
