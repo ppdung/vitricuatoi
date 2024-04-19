@@ -3,29 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Location</title>
+<title>Vị trí của tôi</title>
 <style>
-  body {
+  body 
+  {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
     background-color: #f8f9fa;
     text-align: center;
   }
-  #locationInfo {
+  #locationInfo 
+  {
     width: 95%;
     height: 95%;
-    /* max-width: 800px; */
     margin: 0 auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  #map {
+  #map 
+  {
     width: 100%;
     height: 680px;
-    /* margin-top: 20px; */
   }
 </style>
 </head>
@@ -34,12 +35,12 @@
   <h1>Vị trí của tôi</h1>
   <p id="latitude">Vĩ độ: Đang tải...</p>
   <p id="longitude">Kinh độ: Đang tải...</p>
-  <!-- <iframe style="border: 0;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d8610.002666720899!2d106.74387608943411!3d10.788131574020852!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527dc7bde6647%3A0x1acb145c1a339e2e!2sVAS%20CORPORATION!5e0!3m2!1svi!2s!4v1633589518623!5m2!1svi!2s" width="800" height="400" allowfullscreen="allowfullscreen"></iframe> -->
   <div id="map"></div>
 </div>
 
 <script>
-function initMap(latitude, longitude) {
+function initMap(latitude, longitude) 
+{
   const mapDiv = document.getElementById('map');
   const map = new google.maps.Map(mapDiv, {
     center: { lat: latitude, lng: longitude },
@@ -51,31 +52,37 @@ function initMap(latitude, longitude) {
   });
 }
 
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
+function getLocation() 
+{
+  if (navigator.geolocation) 
+  {
+    navigator.geolocation.getCurrentPosition(function(position) 
+    {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
       document.getElementById('latitude').textContent = 'Vĩ độ: ' + latitude;
       document.getElementById('longitude').textContent = 'Kinh độ: ' + longitude;
       initMap(latitude, longitude);
-    }, function(error) {
-      alert('Error getting location: ' + error.message);
+    }, 
+    function(error) 
+    {
+      alert('Lỗi khi lấy vị trí: ' + error.message);
     });
-  } else {
-    alert('Geolocation is not supported by your browser.');
+  } 
+  else 
+  {
+    alert('Định vị vị trí không được trình duyệt của bạn hỗ trợ.');
   }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() 
+{
   getLocation();
 });
 </script>
 
 <script async defer
-
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap"></script>
-  <!-- src="https://cdn.jsdelivr.net/gh/somanchiu/Keyless-Google-Maps-API@v6.6/mapsJavaScriptAPI.js"></script> -->
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap"></script>
   <!-- src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCT10g_78FHCrZ1i8Nu4a_0sVruR9qTc-k&callback=initMap"> -->
 </script>
 </body>
