@@ -57,7 +57,7 @@
           longitude = position.coords.longitude;
           document.getElementById('latitude').textContent = 'Vĩ độ: ' + latitude;
           document.getElementById('longitude').textContent = 'Kinh độ: ' + longitude;
-          initMap(latitude, longitude);
+          initMap();
         }, 
         function(error) 
         {
@@ -70,7 +70,7 @@
       }
     }
 
-    function initMap(latitude, longitude) 
+    function initMap() 
     {
       map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: latitude, lng: longitude },
